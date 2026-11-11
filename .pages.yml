@@ -1,0 +1,179 @@
+# Pages CMS configuration — lets Rebecca edit the site's words at https://app.pagescms.org
+# Sign in with GitHub, open this repository, edit, save. The site rebuilds itself.
+
+media:
+  input: content/files
+  output: files
+
+content:
+  - name: questions
+    label: Question cards
+    type: collection
+    path: content/questions
+    format: yaml-frontmatter
+    view:
+      fields: [question, field, status]
+      primary: question
+      sort: [order]
+    fields:
+      - { name: question, label: Question (the big line on the card), type: string, required: true }
+      - name: field
+        label: Field
+        type: select
+        options:
+          values:
+            - { value: finance, label: Finance }
+            - { value: economics, label: Economics }
+            - { value: metrics, label: Econometrics and Statistics }
+            - { value: risk, label: Risk }
+      - { name: answer, label: One-sentence answer, type: text, description: "For work in progress, say the current stage instead." }
+      - { name: method, label: Method words (bottom left of the card), type: string, description: "2 to 4 words, e.g. Regression · neighbourhood data" }
+      - name: status
+        label: Status
+        type: select
+        options:
+          values: [Completed, Coursework, Ongoing, In progress]
+      - { name: date, label: When, type: string, description: "e.g. August 2026" }
+      - { name: kind, label: Type of work, type: string, description: "e.g. Coursework, Personal project, Work experience" }
+      - { name: tools, label: Tools, type: string }
+      - { name: order, label: Position on the board (1 = first), type: number }
+      - { name: related, label: "Related questions (file names, without .md)", type: string, list: true }
+      - name: files
+        label: Files (report, code, slides)
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Button text, type: string }
+          - { name: file, label: File, type: file }
+      - name: figure
+        label: Chart or table (one per page)
+        type: object
+        fields:
+          - { name: image, label: Image, type: image }
+          - { name: caption, label: Caption (what to look at), type: string }
+          - { name: summary, label: Text summary of what it shows, type: text }
+      - { name: hidden, label: Hide this question from the site, type: boolean }
+      - { name: body, label: "Detail page (The data / What I did / What I found / Limits)", type: rich-text }
+
+  - name: notes
+    label: Notes
+    type: collection
+    path: content/notes
+    format: yaml-frontmatter
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: date, label: Date, type: date }
+      - { name: summary, label: One-line summary, type: string }
+      - { name: hidden, label: Hide this note, type: boolean }
+      - { name: body, label: Text (300–500 words), type: rich-text }
+
+  - name: site
+    label: Homepage, About and Contact texts
+    type: file
+    path: content/site.yml
+    format: yaml
+    fields:
+      - { name: name, label: Name, type: string }
+      - { name: full_name, label: Full name, type: string }
+      - { name: city, label: City, type: string }
+      - { name: who_line, label: "Homepage: line under your name", type: string }
+      - { name: umbrella_line, label: "Homepage: umbrella line", type: string }
+      - { name: board_cue, label: "Homepage: small cue above the board", type: string }
+      - { name: next_title, label: "Homepage: 'chasing next' heading", type: string }
+      - { name: next_intro, label: "Homepage: 'chasing next' intro", type: string }
+      - { name: closing_line, label: "Homepage: closing sentence", type: text }
+      - { name: closing_link_text, label: "Homepage: closing link words", type: string }
+      - { name: email, label: Email, type: string }
+      - { name: linkedin_url, label: LinkedIn address, type: string }
+      - { name: linkedin_label, label: LinkedIn text shown, type: string }
+      - { name: base_path, label: "Site path (leave as /)", type: string }
+      - { name: description, label: Search-engine description, type: text }
+      - name: contact
+        label: Contact page
+        type: object
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: open_to, label: What you are open to, type: text }
+          - { name: note, label: Note on replies, type: text }
+      - name: about
+        label: About page
+        type: object
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: intro, label: "Introduction (leave an empty line between paragraphs)", type: text }
+          - { name: currently_title, label: "'Currently' box title", type: string }
+          - name: currently
+            label: "'Currently' box"
+            type: object
+            list: true
+            fields:
+              - { name: label, label: Small label, type: string }
+              - { name: text, label: Text, type: string }
+          - { name: experience_title, label: Experience heading, type: string }
+          - { name: chasing_title, label: "'Chasing next' heading", type: string }
+          - { name: resume_file, label: Resume PDF, type: file }
+          - { name: resume_label, label: Resume link text, type: string }
+
+  - name: experience
+    label: Experience (About page)
+    type: file
+    path: content/experience.yml
+    format: yaml
+    list: true
+    fields:
+      - { name: role, label: Role, type: string }
+      - { name: organisation, label: Organisation, type: string }
+      - { name: dates, label: Dates, type: string }
+      - { name: did, label: One line on what you did, type: text }
+
+  - name: next
+    label: Questions I am chasing next
+    type: file
+    path: content/next.yml
+    format: yaml
+    list: true
+    fields:
+      - { name: question, label: Question, type: string }
+      - name: field
+        label: Field
+        type: select
+        options:
+          values:
+            - { value: finance, label: Finance }
+            - { value: economics, label: Economics }
+            - { value: metrics, label: Econometrics and Statistics }
+            - { value: risk, label: Risk }
+      - { name: line, label: One line (homepage card), type: string }
+      - { name: sentence, label: Full sentence (About page), type: text }
+
+  - name: methods
+    label: Methods page
+    type: file
+    path: content/methods.yml
+    format: yaml
+    fields:
+      - { name: title, label: Title, type: string }
+      - { name: intro, label: Intro line, type: string }
+      - name: groups
+        label: Groups
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Group name, type: string }
+          - name: items
+            label: Rows
+            type: object
+            list: true
+            fields:
+              - { name: name, label: Method or tool, type: string }
+              - { name: level, label: "Level (optional, e.g. Basic)", type: string }
+              - { name: what, label: One line on what it does, type: string }
+              - { name: used_in, label: "Question where you used it (file name, without .md)", type: string }
