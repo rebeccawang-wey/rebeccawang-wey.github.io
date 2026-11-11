@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% from "_parts.html" import arrow %}
+{% block title %}About — {{ site.name }}{% endblock %}
+{% block main %}
+{% set about = site.about %}
+
+<header class="page-head wrap">
+  <h1>{{ about.title }}</h1>
+</header>
+
+<div class="page-body wrap">
+  <div class="about-grid">
+    <div class="prose">
+      {% for para in (about.intro or "").split("\n\n") if para.strip() %}
+      <p>{{ para.strip() }}</p>
+      {% endfor %}
+    </div>
+    <aside class="currently" aria-labelledby="currently-title">
+      <h2 id="currently-title" class="label">{{ about.currently_title }}</h2>
+      <ul>
+        {% for c in about.currently %}
+        <li><span>{{ c.label }}</span>{{ c.text }}</li>
+        {% endfor %}
+      </ul>
+    </aside>
+  </div>
+
+  <section class="section" aria-labelledby="exp-title">
+    <h2 id="exp-title">{{ about.experience_title }}</h2>
+    <ul class="timeline">
+      {% for e in experience %}
+      <li>
+        <p class="when">{{ e.dates }}</p>
+        <div>
+          <p><span class="role">{{ e.role }}</span><br><span class="org">{{ e.organisation }}</span></p>
+          <p class="did">{{ e.did }}</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="chasing-title">
+    <h2 id="chasing-title">{{ about.chasing_title }}</h2>
+    <ul class="chasing">
+      {% for n in next_qs %}
+      <li data-field="{{ n.field }}"><span class="dot" aria-hidden="true"></span>{{ n.sentence or n.question }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="section" aria-label="Resume and contact">
+    <div class="about-links">
+      {% if resume_exists %}
+      <a class="button" href="{{ url(about.resume_file) }}" download>{{ about.resume_label }} {{ arrow("down") }}</a>
+      {% else %}
+      <span class="placeholder-text">[Resume download appears here once <code>content/{{ about.resume_file }}</code> is added.]</span>
+      {% endif %}
+      <a href="{{ url('contact/') }}">Get in touch</a>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

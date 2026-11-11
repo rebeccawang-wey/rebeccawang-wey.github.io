@@ -1,0 +1,19 @@
+# "Questions I am chasing next".
+# The first three show as cards on the homepage (question + one line).
+# All of them show on the About page as full sentences.
+# field: finance, economics, metrics (Econometrics and Statistics), or risk
+
+- question: When does a model stop being trustworthy?
+  field: risk
+  line: "[One line on why this interests you.]"
+  sentence: "[A full sentence version for the About page, e.g. how you would tell when a risk model's estimates should no longer be relied on.]"
+
+- question: "[An empirical economics question you want to test with better data?]"
+  field: economics
+  line: "[One line on why this interests you.]"
+  sentence: "[Full sentence version for the About page.]"
+
+- question: How do you forecast when the period itself is unstable?
+  field: metrics
+  line: "[One line on why this interests you.]"
+  sentence: "[Full sentence version for the About page.]"

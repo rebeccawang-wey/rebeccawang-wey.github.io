@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% from "_parts.html" import arrow %}
+{% block title %}{{ n.title }} — {{ site.name }}{% endblock %}
+{% block description %}{{ n.summary }}{% endblock %}
+{% block main %}
+
+<article>
+  <header class="page-head wrap">
+    <a class="back-link" href="{{ url('notes/') }}">{{ arrow("left") }} All notes</a>
+    <h1 style="margin-top: var(--s5); max-width: 24ch">{{ n.title }}</h1>
+    <p class="note-meta"><time datetime="{{ n.date_iso }}">{{ n.date_text }}</time> · {{ n.minutes }} min read</p>
+  </header>
+  <div class="page-body wrap">
+    <div class="prose">{{ n.html | safe }}</div>
+  </div>
+</article>
+
+{% endblock %}

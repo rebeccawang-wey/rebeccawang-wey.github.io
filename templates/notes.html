@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Notes — {{ site.name }}{% endblock %}
+{% block main %}
+
+<header class="page-head wrap">
+  <h1>Notes</h1>
+  <p class="lead">Short explainers, newest first. One concept or one week of work each, in plain English.</p>
+</header>
+
+<div class="page-body wrap">
+  {% if notes %}
+  <ol class="note-list" reversed>
+    {% for n in notes %}
+    <li class="note-item">
+      <time datetime="{{ n.date_iso }}">{{ n.date_text }}</time>
+      <div>
+        <h2><a href="{{ url('notes/' ~ n.slug ~ '/') }}">{{ n.title }}</a></h2>
+        <p>{{ n.summary }}</p>
+        <span class="reading">{{ n.minutes }} min read</span>
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  <p class="placeholder-text">No notes yet.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

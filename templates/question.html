@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% from "_parts.html" import question_card, arrow %}
+{% block title %}{{ q.question }} — {{ site.name }}{% endblock %}
+{% block description %}{{ q.answer }}{% endblock %}
+{% block main %}
+
+<article>
+  <header class="detail-head wrap" data-field="{{ q.field }}">
+    <div class="topline">
+      <a class="back-link" href="{{ url('') }}">{{ arrow("left") }} Back to the board</a>
+      <p class="field-tag label field-text"><span class="dot" aria-hidden="true"></span>{{ q.field_name }}</p>
+    </div>
+    <h1>{{ q.question }}</h1>
+    <div class="answer-box">
+      <p class="label">Short answer</p>
+      <p>{{ q.answer }}</p>
+    </div>
+    <dl class="meta-row">
+      {% if q.date %}<div><dt>When</dt><dd>{{ q.date }}</dd></div>{% endif %}
+      {% if q.kind %}<div><dt>Type of work</dt><dd>{{ q.kind }}</dd></div>{% endif %}
+      {% if q.status %}<div><dt>Status</dt><dd>{{ q.status }}</dd></div>{% endif %}
+      {% if q.tools %}<div><dt>Tools</dt><dd>{{ q.tools }}</dd></div>{% endif %}
+    </dl>
+  </header>
+
+  <div class="wrap"><hr class="rule"></div>
+  <div class="detail-body wrap">
+    <div class="prose">{{ q.body_before | safe }}</div>
+
+    {% set fig = q.figure %}
+    {% if fig %}
+    <figure class="figure">
+      <div class="frame">
+        {% if fig.image %}
+        <img src="{{ url(fig.image) }}" alt="{{ fig.summary }}">
+        {% else %}
+        <div class="placeholder">
+          <span class="label">Chart, table or diagram</span>
+          <span>Add an image file and set <code>figure: image:</code> in this question's file.</span>
+        </div>
+        {% endif %}
+      </div>
+      <figcaption>{% if fig.caption %}<strong>{{ fig.caption }}</strong> {% endif %}{{ fig.summary }}</figcaption>
+    </figure>
+    {% endif %}
+
+    {% if q.body_after %}<div class="prose">{{ q.body_after | safe }}</div>{% endif %}
+  </div>
+
+  {% if q.files %}
+  <section class="files wrap" aria-labelledby="files-title">
+    <hr class="rule">
+    <h2 id="files-title" class="label">Files</h2>
+    <ul>
+      {% for f in q.files %}
+      <li><a class="button" href="{{ url(f.href) }}">{{ f.label }} {{ arrow() }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+</article>
+
+{% if q.related %}
+<section class="related wrap" aria-labelledby="related-title">
+  <h2 id="related-title">More questions like this</h2>
+  <ul class="card-grid">
+    {% for r in q.related %}
+    <li>{{ question_card(r, url) }}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% endblock %}

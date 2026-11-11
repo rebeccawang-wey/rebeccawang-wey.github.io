@@ -1,0 +1,19 @@
+{% macro arrow(direction="right") %}
+{% if direction == "left" %}
+<svg class="arrow" aria-hidden="true" width="18" height="12" viewBox="0 0 18 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 6H2M6.5 1.5 2 6l4.5 4.5"/></svg>
+{% elif direction == "down" %}
+<svg class="arrow" aria-hidden="true" width="12" height="16" viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 0v14M1.5 9.5 6 14l4.5-4.5"/></svg>
+{% else %}
+<svg class="arrow" aria-hidden="true" width="18" height="12" viewBox="0 0 18 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h15M11.5 1.5 16 6l-4.5 4.5"/></svg>
+{% endif %}
+{% endmacro %}
+
+{% macro question_card(q, url, heading="h3") %}
+<article class="qcard" data-field="{{ q.field }}">
+  <span class="dot" aria-hidden="true"></span>
+  <p class="label field-text">{{ q.field_name }}</p>
+  <{{ heading }}><a href="{{ url('questions/' ~ q.slug ~ '/') }}">{{ q.question }}</a></{{ heading }}>
+  <p class="answer">{{ q.answer }}</p>
+  <p class="card-foot"><span class="method">{{ q.method }}</span><span class="status"><span class="visually-hidden">Status: </span>{{ q.status }}</span></p>
+</article>
+{% endmacro %}

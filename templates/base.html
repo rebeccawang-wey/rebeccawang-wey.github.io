@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en-CA" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ site.name }}{% endblock %}</title>
+<meta name="description" content="{% block description %}{{ site.description }}{% endblock %}">
+<meta name="author" content="{{ site.full_name }}">
+<meta property="og:title" content="{{ self.title() }}">
+<meta property="og:description" content="{{ self.description() }}">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#FAF7F2">
+<link rel="icon" href="{{ url('assets/favicon.svg') }}" type="image/svg+xml">
+<link rel="preload" href="{{ url('assets/fonts/inter-regular.woff') }}" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="{{ url('assets/fonts/lora-var.woff') }}" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="{{ url('assets/css/site.css') }}">
+<script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-nav">
+  <div class="wrap">
+    <a class="site-name" href="{{ url('') }}">{{ site.name }}</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav aria-label="Main">
+      <ul class="nav-links" id="nav-links">
+        {% for label, path in nav %}
+        <li><a href="{{ url(path) }}"{% if page == path %} aria-current="page"{% endif %}>{{ label }}</a></li>
+        {% endfor %}
+        <li class="nav-cta"><a class="button" href="{{ url('contact/') }}">Get in touch</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+{% block main %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>{{ site.name }} · {{ site.city }} · {{ year }}</span>
+    <nav aria-label="Footer">
+      <ul>
+        {% for label, path in nav %}
+        <li><a href="{{ url(path) }}">{{ label }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <ul class="contact-links">
+      <li><a href="mailto:{{ site.email }}">Email</a></li>
+      <li><a href="{{ site.linkedin_url }}" rel="me">LinkedIn</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="{{ url('assets/js/site.js') }}" defer></script>
+</body>
+</html>

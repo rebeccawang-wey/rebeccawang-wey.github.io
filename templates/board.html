@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% from "_parts.html" import question_card, arrow %}
+{% block title %}{{ site.name }} — The Question Board{% endblock %}
+{% block main %}
+
+<section class="intro wrap" aria-labelledby="intro-name">
+  <h1 id="intro-name">{{ site.name }}</h1>
+  <p class="who">{{ site.who_line }}</p>
+  <p class="umbrella">{{ site.umbrella_line }}</p>
+</section>
+
+<div class="filters">
+  <div class="wrap" role="group" aria-label="Show questions by field">
+    <button class="filter" type="button" data-filter="all" data-field="all" aria-pressed="true">All</button>
+    {% for key in filter_order %}
+    <button class="filter" type="button" data-filter="{{ key }}" data-field="{{ key }}" aria-pressed="false"><span class="dot" aria-hidden="true"></span>{{ fields[key] }}</button>
+    {% endfor %}
+  </div>
+</div>
+
+<section class="board-area wrap" aria-labelledby="board-title">
+  <h2 id="board-title" class="visually-hidden">Questions I have investigated</h2>
+  <p class="board-cue label">{{ site.board_cue }} {{ arrow("down") }}</p>
+  <div class="board">
+    <ul class="card-grid" id="board-cards">
+      {% for q in questions %}
+      <li data-card-field="{{ q.field }}">{{ question_card(q, url) }}</li>
+      {% endfor %}
+    </ul>
+    <p class="visually-hidden" id="filter-status" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+{% if next_qs %}
+<section class="next wrap" aria-labelledby="next-title">
+  <h2 id="next-title">{{ site.next_title }}</h2>
+  <p class="section-intro">{{ site.next_intro }}</p>
+  <ul class="card-grid">
+    {% for n in next_qs %}
+    <li>
+      <article class="fcard" data-field="{{ n.field }}">
+        <h3>{{ n.question }}</h3>
+        <p>{{ n.line }}</p>
+        <p class="label field-text">{{ n.field_name }}</p>
+      </article>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+<section class="closing wrap" aria-label="Contact">
+  <p>{{ site.closing_line }} <a href="{{ url('contact/') }}">{{ site.closing_link_text }}</a></p>
+</section>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "_parts.html" import arrow %}
+{% block title %}Methods — {{ site.name }}{% endblock %}
+{% block main %}
+
+<header class="page-head wrap">
+  <h1>{{ methods.title }}</h1>
+  <p class="lead">{{ methods.intro }}</p>
+</header>
+
+<div class="page-body wrap">
+  {% for group in methods.groups %}
+  <section class="method-group" aria-labelledby="group-{{ loop.index }}">
+    <h2 id="group-{{ loop.index }}">{{ group.name }}</h2>
+    <ul class="method-list">
+      {% for item in group['items'] %}
+      <li class="method-row">
+        <p class="name">{{ item.name }}{% if item.level %}<span class="level">{{ item.level }}</span>{% endif %}</p>
+        <p class="what">{{ item.what }}</p>
+        <p class="used">
+          {% if item.question %}
+          <a href="{{ url('questions/' ~ item.question.slug ~ '/') }}" data-field="{{ item.question.field }}"><span class="visually-hidden">Used in: {{ item.question.question }}</span><span aria-hidden="true">See where I used it</span> {{ arrow() }}</a>
+          {% endif %}
+        </p>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+</div>
+
+{% endblock %}

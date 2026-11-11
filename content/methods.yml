@@ -1,0 +1,51 @@
+# The Methods page ("Methods I can use").
+# Each row: name, what (one line), level (optional — be honest), and
+# used_in: the file name of a question (without .md), or leave it out.
+
+title: Methods I can use
+intro: The tools and methods I have actually used, each linked to a question where I used it.
+
+groups:
+  - name: Data handling
+    items:
+      - name: Cleaning and joining data — SQL and DuckDB
+        what: Pulling, checking and joining large tables before any analysis.
+        used_in: portfolio-bad-day
+      - name: Python with pandas and NumPy
+        level: Basic, improving through project work
+        what: Data work and the first steps of the backtesting lab.
+        used_in: portfolio-bad-day
+      - name: Analysis in R
+        what: "[One line on what you do with R.]"
+        used_in: wellspring-system-update
+
+  - name: Statistical and econometric methods
+    items:
+      - name: Regression (OLS)
+        what: Estimating how one thing moves with another, holding other factors equal.
+        used_in: police-and-crime
+      - name: Instrumental variables, probit and logit — Stata
+        what: Choosing the model that fits the question and the data.
+        used_in: which-method
+
+  - name: Finance methods
+    items:
+      - name: Discounted cash flow valuation
+        what: Estimating what a company is worth from the cash it is expected to produce.
+        used_in: company-worth
+      - name: Value at Risk estimation and backtesting
+        level: In progress
+        what: Estimating a portfolio's loss on a bad day, then checking the estimate against what happened.
+        used_in: portfolio-bad-day
+      - name: Budgeting and financial reporting
+        what: Planning, tracking and reporting money for a real organisation.
+        used_in: running-club-finances
+
+  - name: Communication
+    items:
+      - name: Writing a short research note
+        what: Stating a question, a method and a result so a non-specialist can follow it.
+        used_in: police-and-crime
+      - name: Stock pitch
+        what: Turning a valuation into a clear recommendation with its reasons.
+        used_in: company-worth

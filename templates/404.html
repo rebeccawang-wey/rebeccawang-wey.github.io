@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% from "_parts.html" import arrow %}
+{% block title %}Page not found — {{ site.name }}{% endblock %}
+{% block main %}
+
+<header class="page-head wrap">
+  <h1>This page is not on the board.</h1>
+  <p class="lead">The link may be old, or the page may have moved.</p>
+</header>
+<div class="page-body wrap">
+  <a class="back-link" href="{{ url('') }}">{{ arrow("left") }} Back to the board</a>
+</div>
+
+{% endblock %}

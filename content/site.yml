@@ -1,0 +1,61 @@
+# ------------------------------------------------------------------
+# Site-wide texts. Change the words after the colon and save.
+# Words in [square brackets] are placeholders still to be written.
+# ------------------------------------------------------------------
+
+name: Rebecca Wang
+full_name: Rebecca Eryue Wang
+city: Toronto
+
+# Homepage header
+who_line: Third-year student at the University of Toronto — finance, economics, and statistics.
+umbrella_line: I analyse information, form a judgement, and explain what it means.
+
+# Small cue above the board
+board_cue: Start with a question
+
+# "Questions I am chasing next" strip on the homepage
+next_title: Questions I am chasing next
+next_intro: Work I have not done yet. No answers here — only the questions.
+
+# Closing line at the bottom of the homepage (the link goes to Contact)
+closing_line: I am open to research assistant roles and internships. If one of these questions is close to your work,
+closing_link_text: get in touch.
+
+# Contact details (used on the Contact page and in every footer)
+email: "[your.email@example.com]"
+linkedin_url: "https://www.linkedin.com/in/[your-profile]"
+linkedin_label: "[linkedin.com/in/your-profile]"
+
+# Where the site lives. Leave as "/" for a site at username.github.io or your
+# own domain. For a site at username.github.io/my-site, write "/my-site/".
+base_path: "/"
+
+# Browser tab and search-engine description
+description: Rebecca Wang — questions in finance, economics, econometrics and statistics, each with the data, the method and a short answer.
+
+# Contact page
+contact:
+  title: Get in touch
+  open_to: I am open to research assistant roles in finance, economics, econometrics, or statistics, and to Summer 2027 internships in Toronto and the Greater Toronto Area.
+  note: I am a full-time student during term, so I usually reply within [two or three] working days.
+
+# About page
+about:
+  title: About
+  intro: |
+    I am a third-year undergraduate at the University of Toronto, studying Rotman Commerce with a Finance and Economics Specialist and a Statistics Major. I expect to graduate in June 2028.
+
+    I like questions that can be checked. I analyse information, form a judgement, and explain what it means — in finance, economics, econometrics, and statistics. [One or two more sentences in your own words.]
+  currently_title: Currently
+  currently:
+    - label: This term
+      text: "[Your current term focus]"
+    - label: Course interest
+      text: How machine learning models in finance behave on real data.
+    - label: Project in progress
+      text: A Value at Risk backtesting lab — the data is built, the backtests are next.
+  experience_title: Experience
+  chasing_title: Questions I am chasing next
+  resume_file: files/resume.pdf          # put the PDF at content/files/resume.pdf
+  resume_label: Download my resume (PDF)
